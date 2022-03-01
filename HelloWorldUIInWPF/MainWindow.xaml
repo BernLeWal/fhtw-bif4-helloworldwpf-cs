@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
             <Label   Grid.Column="0" Margin="5" VerticalAlignment="Center">Enter your target to greet:</Label>
             <TextBox Grid.Column="1" Margin="5" Height="25" Text="{Binding Input, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center"></TextBox>
-            <Button  Grid.Column="2" Margin="5" Command="{Binding ExecuteCommand}"  VerticalAlignment="Center" Height="30" Width="60" >Execute</Button>
+            <Button  Grid.Column="2" Margin="5" Command="{Binding ExecuteCommand}" Click="Button_Click"  VerticalAlignment="Center" Height="30" Width="60" >Execute</Button>
         </Grid>
         <Label Grid.Row="1" HorizontalAlignment="Center" Content="{Binding Output}" VerticalAlignment="Center" FontSize="36"></Label>
     </Grid>

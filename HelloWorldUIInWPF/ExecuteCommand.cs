@@ -17,7 +17,8 @@ namespace HelloWorldUIInWPF
                 if (args.PropertyName == "Input")
                 {
                     Debug.Print("command: reveived prop changed of Input");
-                    CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+                    //CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+                    _canExecuteChangedEventHandler?.Invoke(this, EventArgs.Empty);
                 }
             };
         }
@@ -36,6 +37,20 @@ namespace HelloWorldUIInWPF
             Debug.Print("command: execute done");
         }
 
-        public event EventHandler? CanExecuteChanged;
+        //public event EventHandler? CanExecuteChanged;
+        private EventHandler _canExecuteChangedEventHandler;
+        public event EventHandler? CanExecuteChanged
+        {
+            add
+            {
+                Debug.Print($"added CanExecuteChanged-handler {value}");
+                _canExecuteChangedEventHandler += value;
+            }
+            remove 
+            {
+                Debug.Print($"removed CanExecuteChanged-handler {value}");
+                _canExecuteChangedEventHandler -= value;
+            }
+        }
     }
 }

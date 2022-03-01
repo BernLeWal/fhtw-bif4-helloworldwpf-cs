@@ -58,7 +58,20 @@ namespace HelloWorldUIInWPF
 
         public ICommand ExecuteCommand { get; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
+        private PropertyChangedEventHandler _propertyChangedEventHandler;
+        public event PropertyChangedEventHandler PropertyChanged {
+            add
+            {
+                Debug.Print($"added PropertyChanged-handler {value}");
+                _propertyChangedEventHandler += value;
+            }
+            remove
+            {
+                Debug.Print($"removed PropertyChanged-handler {value}");
+                _propertyChangedEventHandler -= value;
+            }
+        }
 
         public MainViewModel()
         {
@@ -76,7 +89,8 @@ namespace HelloWorldUIInWPF
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             Debug.Print($"propertyChanged \"{propertyName}\"");
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            _propertyChangedEventHandler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
